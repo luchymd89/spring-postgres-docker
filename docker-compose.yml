@@ -1,0 +1,21 @@
+version: "2"
+services:
+  db:
+    container_name: postgres
+    image: postgres:bullseye
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+    volumes:
+      - db_postgres:/data/postgres
+    ports:
+      - "5332:5432"
+    networks:
+      - network_postgres
+    restart: unless-stopped
+networks:
+  network_postgres:
+    driver: bridge
+volumes:
+    db_postgres:
